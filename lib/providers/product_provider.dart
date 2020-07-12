@@ -1,5 +1,5 @@
 
-import 'package:MyShop/models/product.dart';
+import './product.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

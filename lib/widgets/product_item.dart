@@ -12,14 +12,13 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final MyProduct = Provider.of<Product>(context);
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
         child: GestureDetector(
-          onTap: (){
+          onTap: () {
             Navigator.of(context).pushNamed(
               ProductDetailScreen.routeName,
               arguments: MyProduct.id,
@@ -32,12 +31,15 @@ class ProductItem extends StatelessWidget {
         ),
         footer: GridTileBar(
           backgroundColor: Colors.black87,
-          leading: IconButton(
-            icon: Icon( MyProduct.isFav? Icons.favorite : Icons.favorite_border ),
-            onPressed: () {
-              MyProduct.toggleMyFav();
-            },
-            color: Theme.of(context).accentColor,
+          leading: Consumer<Product>(
+            builder: (ctx, Product , child) => IconButton(
+              icon: Icon(
+                  MyProduct.isFav ? Icons.favorite : Icons.favorite_border),
+              onPressed: () {
+                MyProduct.toggleMyFav();
+              },
+              color: Theme.of(context).accentColor,
+            ),
           ),
           title: Text(
             MyProduct.title,

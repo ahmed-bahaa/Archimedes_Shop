@@ -32,6 +32,11 @@ class Cart with ChangeNotifier {
     return total;
   }
 
+  void removeItem(productId){
+    _items.remove(productId);
+    notifyListeners();
+  }
+
   void addItem(
     String productId,
     double price,

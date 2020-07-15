@@ -13,15 +13,15 @@ class Products with ChangeNotifier {
       description: 'A red shirt - it is pretty red!',
       price: 29.99,
       imageUrl:
-          'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg',
+          'https://i.pinimg.com/originals/76/49/76/7649761f40db67f5c8e879f38f8e45b1.jpg',
     ),
     Product(
       id: 'p2',
-      title: 'Trousers',
+      title: 'Helicopter',
       description: 'A nice pair of trousers.',
       price: 59.99,
       imageUrl:
-          'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg',
+          'https://i.pinimg.com/originals/91/e1/ac/91e1acbf84831475695804a12d7ecee3.jpg',
     ),
     Product(
       id: 'p3',
@@ -29,15 +29,15 @@ class Products with ChangeNotifier {
       description: 'A red shirt - it is pretty red!',
       price: 29.99,
       imageUrl:
-          'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg',
+          'https://s3files.core77.com/blog/images/lead_n_spotlight/476199_spotlight_52037_biO7SV8kA.png',
     ),
     Product(
       id: 'p4',
-      title: 'Red Shirt',
-      description: 'A red shirt - it is pretty red!',
+      title: 'Gears',
+      description: 'Leonardo Da Vinci Machine Gears Engineer Drawing !',
       price: 29.99,
       imageUrl:
-          'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg',
+          'https://i.ebayimg.com/images/g/F6cAAOSwMtxXrOdZ/s-l400.jpg',
     ),
   ];
 

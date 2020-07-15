@@ -6,6 +6,7 @@ import '../widgets/badge.dart';
 import './cart_screen.dart';
 import '../providers/product.dart';
 import '../providers/cart.dart';
+import '../widgets/app_drawer.dart';
 
 enum FilterOptions {
   showFavs,
@@ -48,21 +49,22 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                     )
                   ]),
           Consumer<Cart>(
-            builder: (_, cart , ch ) => Badge(
+            builder: (_, cart, ch) => Badge(
               child: ch,
               value: cart.itemCount.toString(),
             ),
             child: IconButton(
-                icon: Icon(
-                  Icons.shopping_cart,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pushNamed(CartScreen.routeName);
-                },
+              icon: Icon(
+                Icons.shopping_cart,
               ),
+              onPressed: () {
+                Navigator.of(context).pushNamed(CartScreen.routeName);
+              },
+            ),
           ),
         ],
       ),
+      drawer: AppDrawer(),
       body: ProductGrid(_showOnlyFav),
     );
   }

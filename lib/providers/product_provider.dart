@@ -1,11 +1,8 @@
-
 import './product.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class Products with ChangeNotifier {
-
   List<Product> _items = [
     Product(
       id: 'p1',
@@ -36,26 +33,31 @@ class Products with ChangeNotifier {
       title: 'Gears',
       description: 'Leonardo Da Vinci Machine Gears Engineer Drawing !',
       price: 29.99,
-      imageUrl:
-          'https://i.ebayimg.com/images/g/F6cAAOSwMtxXrOdZ/s-l400.jpg',
+      imageUrl: 'https://i.ebayimg.com/images/g/F6cAAOSwMtxXrOdZ/s-l400.jpg',
     ),
   ];
 
   List<Product> get showFavOnly {
-    return _items.where( (prodItem) => prodItem.isFav).toList();
+    return _items.where((prodItem) => prodItem.isFav).toList();
   }
 
   List<Product> get items {
     return [..._items];
   }
 
-  Product findById( String id){
-    return _items.firstWhere(( prod ) => prod.id == id) ; 
+  Product findById(String id) {
+    return _items.firstWhere((prod) => prod.id == id);
   }
 
-  void addProduct() {
-    // some code 
+  void addProduct(Product product) {
+    final newProduct = Product(
+      id: DateTime.now().toString(),
+      title: product.title,
+      description: product.description,
+      price: product.price,
+      imageUrl: product.imageUrl,
+    );
+    _items.add(newProduct);
     notifyListeners();
   }
-
 }

@@ -3,9 +3,11 @@ import 'package:provider/provider.dart';
 import '../providers/product_provider.dart';
 import '../widgets/user_product_item.dart';
 import '../widgets/app_drawer.dart';
+import '../screens/edit_product_screen.dart';
 
 class UserProductsScreen extends StatelessWidget {
   static const routeName = "/user-products";
+
   @override
   Widget build(BuildContext context) {
     final productsData = Provider.of<Products>(context);
@@ -17,7 +19,7 @@ class UserProductsScreen extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
-              // Some code
+              Navigator.of(context).pushNamed(EditProductScreen.routeName );
             },
           ),
         ],
@@ -32,6 +34,7 @@ class UserProductsScreen extends StatelessWidget {
               UserProductItem(
                 productsData.items[i].title,
                 productsData.items[i].imageUrl,
+                productsData.items[i].id,
               ),
               Divider(),
             ],

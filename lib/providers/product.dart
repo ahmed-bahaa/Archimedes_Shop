@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-class Product with ChangeNotifier{
+class Product with ChangeNotifier {
   final String id;
   final String title;
   final String description;
@@ -17,9 +19,27 @@ class Product with ChangeNotifier{
     this.isFav = false,
   });
 
-  void toggleMyFav(){
-    isFav = !isFav;
+  void _setFavValue (bool newVal) {
+    isFav = newVal;
     notifyListeners();
   }
 
+  Future<void> toggleMyFav() async {
+    final oldState = isFav;
+    isFav = !isFav;
+    notifyListeners();
+    final url = "https://flutter-202006.firebaseio.com/products/$id.json";
+    try {
+        final response =  await http.patch(url,
+          body: json.encode({
+            'isFav': isFav,
+          }));
+
+    if ( response.statusCode >= 400){
+        _setFavValue(oldState);
+    }
+    } catch (err) {
+      _setFavValue(oldState);
+    }
+  }
 }

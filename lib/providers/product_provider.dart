@@ -6,37 +6,37 @@ import 'package:http/http.dart' as http;
 
 class Products with ChangeNotifier {
   List<Product> _items = [
-    Product(
-      id: 'p1',
-      title: 'Red Shirt',
-      description: 'A red shirt - it is pretty red!',
-      price: 29.99,
-      imageUrl:
-          'https://i.pinimg.com/originals/76/49/76/7649761f40db67f5c8e879f38f8e45b1.jpg',
-    ),
-    Product(
-      id: 'p2',
-      title: 'Helicopter',
-      description: 'A nice pair of trousers.',
-      price: 59.99,
-      imageUrl:
-          'https://i.pinimg.com/originals/91/e1/ac/91e1acbf84831475695804a12d7ecee3.jpg',
-    ),
-    Product(
-      id: 'p3',
-      title: 'Red Shirt',
-      description: 'A red shirt - it is pretty red!',
-      price: 29.99,
-      imageUrl:
-          'https://s3files.core77.com/blog/images/lead_n_spotlight/476199_spotlight_52037_biO7SV8kA.png',
-    ),
-    Product(
-      id: 'p4',
-      title: 'Gears',
-      description: 'Leonardo Da Vinci Machine Gears Engineer Drawing !',
-      price: 29.99,
-      imageUrl: 'https://i.ebayimg.com/images/g/F6cAAOSwMtxXrOdZ/s-l400.jpg',
-    ),
+    // Product(
+    //   id: 'p1',
+    //   title: 'Red Shirt',
+    //   description: 'A red shirt - it is pretty red!',
+    //   price: 29.99,
+    //   imageUrl:
+    //       'https://i.pinimg.com/originals/76/49/76/7649761f40db67f5c8e879f38f8e45b1.jpg',
+    // ),
+    // Product(
+    //   id: 'p2',
+    //   title: 'Helicopter',
+    //   description: 'A nice pair of trousers.',
+    //   price: 59.99,
+    //   imageUrl:
+    //       'https://i.pinimg.com/originals/91/e1/ac/91e1acbf84831475695804a12d7ecee3.jpg',
+    // ),
+    // Product(
+    //   id: 'p3',
+    //   title: 'Red Shirt',
+    //   description: 'A red shirt - it is pretty red!',
+    //   price: 29.99,
+    //   imageUrl:
+    //       'https://s3files.core77.com/blog/images/lead_n_spotlight/476199_spotlight_52037_biO7SV8kA.png',
+    // ),
+    // Product(
+    //   id: 'p4',
+    //   title: 'Gears',
+    //   description: 'Leonardo Da Vinci Machine Gears Engineer Drawing !',
+    //   price: 29.99,
+    //   imageUrl: 'https://i.ebayimg.com/images/g/F6cAAOSwMtxXrOdZ/s-l400.jpg',
+    // ),
   ];
 
   List<Product> get showFavOnly {
@@ -93,7 +93,20 @@ class Products with ChangeNotifier {
     const url = "https://flutter-202006.firebaseio.com/products.json";
     try {
       final response = await http.get(url);
-      print(json.decode(response.body));
+      final extractedData = json.decode(response.body) as Map<String, dynamic> ;
+      final List<Product> loadedProducts = [];
+      extractedData.forEach((prodId, prodData) { 
+        loadedProducts.add(Product(
+          id: prodId,
+          title: prodData['title'],
+          description: prodData['description'],
+          price: prodData['price'],
+          isFav: prodData['isFav'],
+          imageUrl: prodData['imageUrl'],
+        ));
+      });
+      _items = loadedProducts;
+      notifyListeners();
     }catch(err){
       throw(err);
     }

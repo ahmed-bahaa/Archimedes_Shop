@@ -5,6 +5,7 @@ import '../widgets/product_item.dart';
 import '../widgets/badge.dart';
 import './cart_screen.dart';
 import '../providers/product.dart';
+import '../providers/product_provider.dart';
 import '../providers/cart.dart';
 import '../widgets/app_drawer.dart';
 
@@ -20,6 +21,23 @@ class ProductsOverviewScreen extends StatefulWidget {
 
 class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   var _showOnlyFav = false;
+  var _isInit = true;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      Provider.of<Products>(context).fetchAndSetProducts();
+    }
+
+    _isInit = false;
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -89,6 +89,16 @@ class Products with ChangeNotifier {
     }
   }
 
+  Future<void> fetchAndSetProducts() async {
+    const url = "https://flutter-202006.firebaseio.com/products.json";
+    try {
+      final response = await http.get(url);
+      print(json.decode(response.body));
+    }catch(err){
+      throw(err);
+    }
+  }
+
   void deleteProduct(String id) {
     _items.removeWhere((prod) => prod.id == id);
     notifyListeners();
